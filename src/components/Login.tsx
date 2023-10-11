@@ -16,8 +16,8 @@ export default function Login() {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
         const userData = await loginApi(email, password)
-        dispatch(setUserData(userData.user))
-        client.defaults.headers.common['Authorization'] = userData.user.token
+        dispatch(setUserData(userData))
+        client.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`
         navigate('/')
     }
 
