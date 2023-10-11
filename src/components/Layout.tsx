@@ -1,6 +1,7 @@
 import { Box, Toolbar } from '@mui/material'
 import NavBar from './Navbar'
 import SideNav from './SideNav'
+import { Outlet } from 'react-router-dom'
 export default function Layout() {
     return (
         <Box position="relative">
@@ -12,7 +13,7 @@ export default function Layout() {
                 <Box sx={{ flexGrow: 1, p: 3 }}>
                     <Toolbar />
                     <Box>
-                        Content
+                        <Outlet/>
                     </Box>
                 </Box>
             </Box>

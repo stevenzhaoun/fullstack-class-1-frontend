@@ -9,8 +9,17 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import { Link } from 'react-router-dom';
+
 
 const drawerWidth = 240;
+
+const SIDENAV_LINKS =[
+    {label: 'Dashboard', link: '/'},
+    {label: 'Users', link: '/users'},
+    {label: 'Roles', link: '/roles'},
+    {label: 'Products', link: '/products'},
+]
 
 export default function SideNav() {
     return (<Drawer
@@ -24,12 +33,15 @@ export default function SideNav() {
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
+                {SIDENAV_LINKS.map((link) => (
+                    <Link to={link.link} style={{textDecoration: 'none'}}>
+                        <ListItem key={link.label} disablePadding>
+                            <ListItemButton>
+                                <ListItemText primary={link.label} />
+                            </ListItemButton>
+                        </ListItem>
+                    </Link>
+
                 ))}
             </List>
         </Box>
