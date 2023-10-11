@@ -1,13 +1,24 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { loginApi } from "../api/login.api";
+import { useAppDispatch } from "../hooks/useRedux";
+import { setUserData } from "../slices/userSlice";
+import { useNavigate } from "react-router-dom";
+import client from "../api/AxiosClient";
 
 export default function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
 
-    const handleClick = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
+        const userData = await loginApi(email, password)
+        dispatch(setUserData(userData.user))
+        client.defaults.headers.common['Authorization'] = userData.user.token
+        navigate('/')
     }
 
     const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +36,7 @@ export default function Login() {
                 <TextField value={password} onChange={e => setPassword(e.target.value)} label="password" margin="normal" fullWidth required type="password" />
             </Box>
             <Box my={3}>
-                <Button type="submit" variant="contained" fullWidth onClick={handleClick}>Login</Button>
+                <Button type="submit" variant="contained" fullWidth onClick={handleSubmit}>Login</Button>
             </Box>
         </Box>
     </Box>

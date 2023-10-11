@@ -34,8 +34,8 @@ export default function SideNav() {
         <Box sx={{ overflow: 'auto' }}>
             <List>
                 {SIDENAV_LINKS.map((link) => (
-                    <Link to={link.link} style={{textDecoration: 'none'}}>
-                        <ListItem key={link.label} disablePadding>
+                    <Link key={link.label} to={link.link} style={{textDecoration: 'none'}}>
+                        <ListItem  disablePadding>
                             <ListItemButton>
                                 <ListItemText primary={link.label} />
                             </ListItemButton>
