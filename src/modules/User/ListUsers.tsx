@@ -2,17 +2,20 @@ import { useState, useEffect } from "react"
 import { getUsers } from "../../api/user.api"
 import { User } from "../../types"
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export default function ListUsers() {
+    const [isLoading, setIsLoading] = useState(true)
     const [users, setUsers] = useState<User[]>([])
 
     const navigate = useNavigate()
 
     const fetchData = async () => {
+        setIsLoading(true)
         const usersData = await getUsers()
         setUsers(usersData)
+        setIsLoading(false)
     }
 
     const columns: GridColDef[] = [
@@ -25,6 +28,10 @@ export default function ListUsers() {
     useEffect(() => {
         fetchData()
     }, [])
+
+    if(isLoading) {
+        return <CircularProgress/>
+    }
 
     return <div>
         <Box display="flex" justifyContent="space-between" my={3}>
