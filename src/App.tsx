@@ -9,6 +9,7 @@ import Dashboard from './modules/Doahboard/DashBoard';
 import UserDetail from './modules/User/UserDetails';
 import RoleDetail from './modules/Role/RoleDetail';
 import Login from './components/Login';
+import AccountDetail from './modules/Account/AccountDetail';
 
 function App() {
 
@@ -17,17 +18,18 @@ function App() {
       <CssBaseline />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Dashboard/>}/>
+          <Route index element={<Dashboard />} />
+          <Route path='/account' element={<AccountDetail />} />
           <Route path="/users">
-            <Route index element={<ListUsers/>} />
-            <Route path=":id" element={<UserDetail/>}/>
+            <Route index element={<ListUsers />} />
+            <Route path=":id" element={<UserDetail />} />
           </Route>
           <Route path="/roles">
-            <Route index element={<ListRoles/>} />
-            <Route path=":id" element={<RoleDetail/>}/>
+            <Route index element={<ListRoles />} />
+            <Route path=":id" element={<RoleDetail />} />
           </Route>
         </Route>
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/login" element={<Login />} />
 
       </Routes>
     </>

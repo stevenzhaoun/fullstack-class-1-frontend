@@ -15,3 +15,8 @@ export const loginApi = async (email: string, password: string) => {
     console.log('response.data', response.data)
     return response.data as LoginResponse
 }
+
+export const updatePassword = async (password: string) => {
+    const response = await client.post('/auth/update-password', { password: password })
+    return response.data
+}

@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import { useAppSelector } from '../hooks/useRedux';
 import { selectUser } from '../slices/userSlice';
 import useAuth from '../hooks/useAuth';
+import { Link } from 'react-router-dom';
 // props
 export default function NavBar() {
 
@@ -31,7 +32,7 @@ export default function NavBar() {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         Business Management System
                     </Typography>
-                    {userData?.name}
+                    <Link to="/account" style={{ textDecoration: 'none', color: 'white' }}>{userData?.name}</Link>
                     <Button color="inherit" onClick={handleLogout}>{userData ? 'Logout' : 'Login'}</Button>
                 </Toolbar>
             </AppBar>
