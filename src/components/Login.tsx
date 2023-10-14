@@ -1,23 +1,20 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { loginApi } from "../api/login.api";
-import { useAppDispatch } from "../hooks/useRedux";
-import { setUserData } from "../slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import client from "../api/AxiosClient";
+import useAuth from "../hooks/useAuth";
 
 export default function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const dispatch = useAppDispatch()
     const navigate = useNavigate()
+    const { setUserData } = useAuth()
 
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
         const userData = await loginApi(email, password)
-        dispatch(setUserData(userData))
-        client.defaults.headers.common['Authorization'] = `Bearer ${userData.token}`
+        setUserData(userData)
         navigate('/')
     }
 

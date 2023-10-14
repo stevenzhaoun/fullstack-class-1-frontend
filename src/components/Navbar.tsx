@@ -6,10 +6,15 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { useAppSelector } from '../hooks/useRedux';
 import { selectUser } from '../slices/userSlice';
+import useAuth from '../hooks/useAuth';
 // props
 export default function NavBar() {
 
     const userData = useAppSelector(selectUser)
+    const { logout } = useAuth()
+    const handleLogout = () => {
+        logout()
+    }
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -27,7 +32,7 @@ export default function NavBar() {
                         Business Management System
                     </Typography>
                     {userData?.name}
-                    <Button color="inherit">{userData ? 'Logout' : 'Login'}</Button>
+                    <Button color="inherit" onClick={handleLogout}>{userData ? 'Logout' : 'Login'}</Button>
                 </Toolbar>
             </AppBar>
         </Box>

@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
 // Define a type for the slice state
-interface UserDataState {
+export interface UserDataState {
     id: number,
     email: string,
     name: string,
@@ -23,10 +23,13 @@ export const userSlice = createSlice({
         setUserData: (state, action: PayloadAction<UserDataState>) => {
             state.user = action.payload
         },
+        clearUserData: (state) => {
+            state.user = null
+        }
     },
 })
 
-export const { setUserData } = userSlice.actions
+export const { setUserData, clearUserData } = userSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectUser = (state: RootState) => state.user.user
